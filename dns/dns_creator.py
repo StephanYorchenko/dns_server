@@ -13,16 +13,9 @@ class DNSCreator:
 		self.flags = flags
 		self.id = id
 
-	def add_answer(self, answer):
-		self.answers.append(answer)
-
-	def set_flags(self, flags):
-		self.flags = flags
-
 	def create(self):
 		result = b''
-		result += self.id.to_bytes(2, 'big')\
-                  + self.flags \
+		result += self.id.to_bytes(2, 'big') + self.flags \
                   + len(self.requests).to_bytes(2, 'big') \
                   + len(self.answers).to_bytes(2, 'big') \
                   + len(self.authorities).to_bytes(2, 'big') \

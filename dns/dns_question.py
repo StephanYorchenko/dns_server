@@ -2,10 +2,7 @@ from dns.dns_base import Types, Classes
 
 
 class DNSQuestion:
-	def __init__(self,
-				 qname=b'',
-				 query_type=Types['A'],
-				 query_class=Classes['IN']):
+	def __init__(self, qname=b'', query_type=Types['A'], query_class=Classes['IN']):
 		self.qname = qname
 		self.type = query_type
 		self.class_ = query_class

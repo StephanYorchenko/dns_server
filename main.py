@@ -65,11 +65,10 @@ class DNSServer:
 		ips = await self.resolve_ip(START_SERVER, domain.decode(), client_sock) or []
 		answer_request = DNSCreator(id=req_id)
 		for ip in ips:
-			answer_request.add_answer(
-					DNSResourceRecord(domain, data=b''.join(
-							int(x).to_bytes(1, 'big') for x in ip.split('.')))
-			)
-
+			answer_request.answers.append(
+					DNSResourceRecord(
+						domain, data=b''.join(int(x).to_bytes(1, 'big') for x in ip.split('.'))
+					))
 		answer_request.flags = DNSHeaderFlags.generate_flags(qa=1).to_bytes()
 		self.sock.sendto(answer_request.create(), addr)
 		client_sock.close()
